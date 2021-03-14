@@ -19,17 +19,29 @@ import org.json.simple.parser.ParseException;
 public class RandomBackground
 {
     public static void main( String[] args ) throws FileNotFoundException{
+        //File paths to the images folder Windows Terminal (WT) uses
         String inFilePath = "C:\\Users\\aidan\\AppData\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\RoamingState\\images.txt";
+
+        //the JSON file uses this path for the background image setting, will later be concatenated with the filename
         String imagePath = "ms-appdata:///roaming/";
+
+        //JSON settings path for WT
         String jsonPath = "C:\\Users\\aidan\\AppData\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\settings.json";
+
+        //Linked List that stores all the filenames
         LinkedList<String> filenames = new LinkedList<String>();
+
+        //index chosen for the background
         int chosen = 0;
 
+        //populates the linked list with filenames
         getFilenames(filenames, inFilePath);
 
-        chosen = randomInt(0, filenames.size());
+        //chooses a random number within the size of the list to be the new image
+        chosen = randomInt(0, filenames.size() -1);
 
         try {
+            //new json reader
             FileReader reader = new FileReader(jsonPath);
 
             JSONParser joParser = new JSONParser();
@@ -37,20 +49,25 @@ public class RandomBackground
 
             //System.out.println(jObject);
 
+            //moving down the structure until we get to the defaults class that contains the customization options
             JSONObject profileObj = (JSONObject) jObject.get("profiles");
             JSONObject defaultObj = (JSONObject) profileObj.get("defaults");
+
+            //this gets the current background image
             String bgImageObj = (String) defaultObj.get("backgroundImage");
 
             System.out.println("current image: " + bgImageObj);
 
+            //concatenates the filename with the image path to replace the current one
             imagePath = imagePath + filenames.get(chosen);
 
+            //replace current image with new one
             defaultObj.put("backgroundImage", imagePath);
-
             bgImageObj = (String) defaultObj.get("backgroundImage");
 
             System.out.println("bg image is now: " + bgImageObj);
 
+            //write updated json back to the file
             FileWriter file = new FileWriter(jsonPath);
             file.write(jObject.toJSONString());
             file.flush();
@@ -69,6 +86,7 @@ public class RandomBackground
         }
     }
 
+    //iterate through the txt file to get the filenames
     public static void getFilenames(LinkedList<String> list, String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner scan = new Scanner(file);
