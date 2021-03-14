@@ -8,9 +8,9 @@ to do just that.
 
 ### Sample Runs 
 
-![Sample 1](C:\Users\aidan\src\bgchooser\ex1.png)
-![Sample 2](C:\Users\aidan\src\bgchooser\ex2.png)
-![Sample 3](C:\Users\aidan\src\bgchooser\ex3.png)  
+[![Sample 1](C:\Users\aidan\src\bgchooser\ex1.png)](https://ibb.co/mzRFfg5)
+[![Sample 2](C:\Users\aidan\src\bgchooser\ex2.png)](https://ibb.co/tsTPvPd)
+[![Sample 3](C:\Users\aidan\src\bgchooser\ex3.png)](https://ibb.co/bPFGc69)
 
 ## Some other notes  
 
